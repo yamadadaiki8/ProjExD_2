@@ -22,16 +22,15 @@ def check_bound(rct: pg.Rect) -> tuple[bool, bool]:
     return yoko, tate
 
 def gameover(screen: pg.Surface) -> None:
+    """
+    引数：画面
+    戻り値：なし 
+    こうかとんと爆弾の接触判定の時にゲームオーバー画面表示
+    """
     go_img = pg.Surface((WIDTH, HEIGHT))
-    pg.draw.rect(go_img, (0, 0, 0), (0, 0, WIDTH,HEIGHT))#
-    # go_rct = go_img.get_rect()
-    # go_rct.center = 400, 600
-    # go_img.set_colorkey((0, 0, 0))
+    pg.draw.rect(go_img, (0, 0, 0), (0, 0, WIDTH,HEIGHT))
     go_img.set_alpha(200)
-    
     screen.blit(go_img,[0,0])
-    
-
     
     fonto = pg.font.Font(None, 80)
     txt = fonto.render("GameOver",
@@ -39,6 +38,8 @@ def gameover(screen: pg.Surface) -> None:
     txt_rct = txt.get_rect()
     txt_rct.center =WIDTH/2,HEIGHT/2
     screen.blit(txt, txt_rct)#moji
+
+
     kk_img = pg.image.load("fig\8.png")
     kk_img2= pg.image.load("fig\8.png")
     kk_rct = kk_img.get_rect()
@@ -47,6 +48,8 @@ def gameover(screen: pg.Surface) -> None:
     kk_rct2.center = WIDTH/2-200,HEIGHT/2
     screen.blit(kk_img, kk_rct)
     screen.blit(kk_img2, kk_rct2)
+
+    
     pg.display.update()
     time.sleep(5)
 def main():
