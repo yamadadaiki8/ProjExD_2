@@ -21,6 +21,7 @@ def check_bound(rct: pg.Rect) -> tuple[bool, bool]:
         tate = False
     return yoko, tate
 
+
 def gameover(screen: pg.Surface) -> None:
     """
     引数：画面
@@ -49,9 +50,11 @@ def gameover(screen: pg.Surface) -> None:
     screen.blit(kk_img, kk_rct)
     screen.blit(kk_img2, kk_rct2)
 
-    
+
     pg.display.update()
-    time.sleep(5)
+    time.sleep(5)#修正インデントを二つあける
+
+
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))
