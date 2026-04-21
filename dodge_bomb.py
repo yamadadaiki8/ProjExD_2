@@ -2,7 +2,7 @@ import os
 import sys
 import pygame as pg
 import random
-
+import time
 WIDTH, HEIGHT = 1100, 650
 DELTA = {pg.K_UP : (0,-5),pg.K_DOWN : (0,5),pg.K_LEFT : (-5,0), pg.K_RIGHT: (5,0),}
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -21,6 +21,34 @@ def check_bound(rct: pg.Rect) -> tuple[bool, bool]:
         tate = False
     return yoko, tate
 
+def gameover(screen: pg.Surface) -> None:
+    go_img = pg.Surface((WIDTH, HEIGHT))
+    pg.draw.rect(go_img, (0, 0, 0), (0, 0, WIDTH,HEIGHT))#
+    # go_rct = go_img.get_rect()
+    # go_rct.center = 400, 600
+    # go_img.set_colorkey((0, 0, 0))
+    go_img.set_alpha(200)
+    
+    screen.blit(go_img,[0,0])
+    
+
+    
+    fonto = pg.font.Font(None, 80)
+    txt = fonto.render("GameOver",
+    True, (255, 255, 255))
+    txt_rct = txt.get_rect()
+    txt_rct.center =WIDTH/2,HEIGHT/2
+    screen.blit(txt, txt_rct)#moji
+    kk_img = pg.image.load("fig\8.png")
+    kk_img2= pg.image.load("fig\8.png")
+    kk_rct = kk_img.get_rect()
+    kk_rct2 = kk_img2.get_rect()
+    kk_rct.center = WIDTH/2+200,HEIGHT/2
+    kk_rct2.center = WIDTH/2-200,HEIGHT/2
+    screen.blit(kk_img, kk_rct)
+    screen.blit(kk_img2, kk_rct2)
+    pg.display.update()
+    time.sleep(5)
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))
@@ -43,7 +71,8 @@ def main():
             if event.type == pg.QUIT: 
                 return
         if kk_rct.colliderect(bb_rct):
-            return
+            gameover(screen)
+            return 
         screen.blit(bg_img, [0, 0]) 
 
         key_lst = pg.key.get_pressed()
